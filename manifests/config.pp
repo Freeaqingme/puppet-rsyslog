@@ -60,6 +60,7 @@ define rsyslog::config (
     destination    => $firewall_remote,
     destination_v6 => $firewall_remote_v6,
     protocol       => 'udp',
+    port           => 514,
     direction      => 'output'
   }
 
