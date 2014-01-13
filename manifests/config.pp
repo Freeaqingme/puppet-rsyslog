@@ -19,10 +19,12 @@
 #   Default 20
 #
 define rsyslog::config (
-  $ensure  = present,
-  $content = '',
-  $source  = '',
-  $order   = '20',
+  $ensure             = present,
+  $content            = '',
+  $source             = '',
+  $order              = '20',
+  $firewall_remote    = '',
+  $firewall_remote_v6 = '',
 ) {
 
   include rsyslog
@@ -52,6 +54,13 @@ define rsyslog::config (
     require => Package[$rsyslog::package],
     replace => $rsyslog::manage_file_replace,
     audit   => $rsyslog::manage_audit,
+  }
+
+  firewall::rule { "rsyslog-${name}":
+    destination    => $firewall_remote,
+    destination_v6 => $firewall_remote_v6,
+    protocol       => 'udp',
+    direction      => 'output'
   }
 
 }
