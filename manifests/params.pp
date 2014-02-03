@@ -27,6 +27,7 @@ class rsyslog::params {
 
   $service = $::operatingsystem ? {
     OpenSuSE => 'syslog',
+    'FreeBSD' => 'rsyslogd',
     default  => 'rsyslog',
   }
 
@@ -47,10 +48,12 @@ class rsyslog::params {
   }
 
   $config_dir = $::operatingsystem ? {
+    'FreeBSD' => '/usr/local/etc/rsyslog.d',
     default => '/etc/rsyslog.d',
   }
 
   $config_file = $::operatingsystem ? {
+    'FreeBSD' => '/usr/local/etc/rsyslog.conf',
     default => '/etc/rsyslog.conf',
   }
 
@@ -63,6 +66,7 @@ class rsyslog::params {
   }
 
   $config_file_group = $::operatingsystem ? {
+    'FreeBSD' => 'wheel',
     default => 'root',
   }
 
