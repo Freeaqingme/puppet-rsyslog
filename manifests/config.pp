@@ -24,7 +24,6 @@ define rsyslog::config (
   $source             = '',
   $order              = '20',
   $firewall_remote    = '',
-  $firewall_remote_v6 = '',
 ) {
 
   include rsyslog
@@ -58,7 +57,6 @@ define rsyslog::config (
 
   firewall::rule { "rsyslog-${name}":
     destination    => $firewall_remote,
-    destination_v6 => $firewall_remote_v6,
     protocol       => 'udp',
     port           => 514,
     direction      => 'output'
